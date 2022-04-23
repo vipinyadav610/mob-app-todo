@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import InputForm from "./Component/InputForm";
+import { inject, observer } from "mobx-react";
+import TodoList from "./Component/TodoList";
+import Search from "./Component/Search";
+import Pagination from "./Component/Pagination";
+import "./App.css";
 
-function App() {
+function App(props) {
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [todosPerPage, setTodosPerPage] = useState(3);
+
+  // const indexOfLastTodo = currentPage * todosPerPage;
+  // const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+  // const currentTodos = props.user.todolist.slice(
+  //   indexOfFirstTodo,
+  //   indexOfLastTodo
+  // );
+  // const paginate = (pageNumber) => {
+  //   setCurrentPage(pageNumber);
+  // };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo list</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <InputForm />
+      </div>
+      <div>
+        <Search />
+      </div>
+
+      <TodoList />
+      {/* <TodoList todolist={currentTodos} /> */}
+
+      {/* <Pagination
+        todosPerPage={todosPerPage}
+        totalTodos={props.user.todoList.length}
+        paginate={paginate}
+      /> */}
     </div>
   );
 }
 
-export default App;
+export default inject("user")(observer(App));
